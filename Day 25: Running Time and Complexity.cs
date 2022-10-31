@@ -3,22 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 class Solution {
     
-    static bool isPrime(int input, int currentDivisor){
-        // corner cases
-        if (input == 0 || input == 1) {
+    static bool isPrime(int n){
+         if (n <= 1)
             return false;
-        }
  
-        // Checking Prime
-        if (input == currentDivisor)
-            return true;
+        // Check from 2 to sqrt(n)... no need to check past sqrt
+        for (int i = 2; i <= Math.Sqrt(n); i++)
+            if (n % i == 0)
+                return false;
  
-        // base cases
-        if (input % currentDivisor == 0) {
-            return false;
-        }
-        currentDivisor++;
-        return isPrime(input, currentDivisor);
+        return true;
     }
     static void Main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution */
@@ -26,7 +20,7 @@ class Solution {
         for(int i = 0; i< numberOfLines; i++)
         {
             int input = Int32.Parse(Console.ReadLine());
-            if(isPrime(input,2)==true)
+            if(isPrime(input)==true)
                 Console.WriteLine("Prime");
             else
                 Console.WriteLine("Not prime");
